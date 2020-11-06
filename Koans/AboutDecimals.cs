@@ -10,7 +10,7 @@ namespace DotNetCoreKoans.Koans
         {
             var d = 1m;
 
-            Assert.Equal(typeof(FillMeIn), d.GetType());
+            Assert.Equal(typeof(decimal), d.GetType());
         }
 
         [Step(2)]
@@ -24,9 +24,15 @@ namespace DotNetCoreKoans.Koans
 
             var result = d + n;
 
-            Assert.Equal(FILL_ME_IN, result);
+            Assert.Equal(12.2m, result);
 
             // Notice that the result is a decimal when you do this
+
+            // Okay, great, but will it work with int+decimal tho
+            var newResult = n + d;
+            Assert.Equal(12.2m, newResult);
+            // yea, it would, that's wonderful,
+            // but floats aren't that great then
         }
 
         [Step(3)]
@@ -41,12 +47,10 @@ namespace DotNetCoreKoans.Koans
             double db = 7.4d;
 
             var result = 0m;
-            //result = d + (FillMeIn) f;
-
+            result = d + (decimal)f;
             Assert.Equal(9.3m, result);
 
-            //result = d + (FillMeIn) db;
-
+            result = d + (decimal)db;
             Assert.Equal(12.5m, result);
         }
 
@@ -54,15 +58,27 @@ namespace DotNetCoreKoans.Koans
         public void DecimalsHaveMaximumAndMinimumValues()
         {
             // Even the zen of the decimal has its limits...
-            Assert.Throws(typeof(FillMeIn), () =>
+            Assert.Throws(typeof(System.FormatException), () =>
             {
+                // TODO this throws System.FormatException not because
+                // it's too big, but because of commas
+                // formatting below is correct
+                //
+                // var d = decimal.Parse("-79 228 162 514 264 337 593 543 950 336");
                 var d = decimal.Parse("79,228,162,514,264,337,593,543,950,336");
             });
 
-            Assert.Throws(typeof(FillMeIn), () =>
+            Assert.Throws(typeof(System.FormatException), () =>
             {
                 var d = decimal.Parse("-79,228,162,514,264,337,593,543,950,336");
             });
+
+            // TODO also i could throw those in
+            // just for context above throw examples 
+            Assert.Equal(decimal.MinValue,
+                         decimal.Parse("-79 228 162 514 264 337 593 543 950 335"));
+            Assert.Equal(decimal.MaxValue,
+                         decimal.Parse("79 228 162 514 264 337 593 543 950 335"));
         }
 
         [Step(5)]
