@@ -38,11 +38,7 @@ namespace DotNetCoreKoans.Koans
             Assert.True(array.IsFixedSize);
 
             //...it means we can't do this: array[1] = 13;
-<<<<<<< HEAD
-            Assert.Throws(typeof(FillMeIn), delegate () { array[1] = 13; });
-=======
             Assert.Throws(typeof(IndexOutOfRangeException), delegate () { array[1] = 13; });
->>>>>>> 730e1bf (aboutArrays)
 
             //This is because the array is fixed at length 1. You could write a function
             //which created a new array bigger than the last, copied the elements over, and
@@ -52,11 +48,7 @@ namespace DotNetCoreKoans.Koans
             Assert.Equal(array, dynamicArray.ToArray());
 
             dynamicArray.Add(13);
-<<<<<<< HEAD
-            Assert.Equal((new int[] { 42, FILL_ME_IN }), dynamicArray.ToArray());
-=======
             Assert.Equal((new int[] { 42, 13 }), dynamicArray.ToArray());
->>>>>>> 730e1bf (aboutArrays)
         }
 
         [Step(3)]
@@ -64,13 +56,8 @@ namespace DotNetCoreKoans.Koans
         {
             var array = new[] { "peanut", "butter", "and", "jelly" };
 
-<<<<<<< HEAD
-            Assert.Equal(FILL_ME_IN, array[0]);
-            Assert.Equal(FILL_ME_IN, array[3]);
-=======
             Assert.Equal("peanut", array[0]);
             Assert.Equal("jelly", array[3]);
->>>>>>> 730e1bf (aboutArrays)
 
             //This doesn't work: Assert.Equal(FILL_ME_IN, array[-1]);
             // thx from python user
@@ -81,13 +68,8 @@ namespace DotNetCoreKoans.Koans
         {
             var array = new[] { "peanut", "butter", "and", "jelly" };
 
-<<<<<<< HEAD
-            Assert.Equal(new string[] { FILL_ME_IN, FILL_ME_IN }, array.Take(2).ToArray());
-            Assert.Equal(new string[] { FILL_ME_IN, FILL_ME_IN }, array.Skip(1).Take(2).ToArray());
-=======
             Assert.Equal(new string[] { "peanut", "butter" }, array.Take(2).ToArray());
             Assert.Equal(new string[] { "butter", "and" }, array.Skip(1).Take(2).ToArray());
->>>>>>> 730e1bf (aboutArrays)
         }
 
         [Step(5)]

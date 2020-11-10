@@ -22,14 +22,10 @@ namespace DotNetCoreKoans.Koans
             //Don't be confused by the code below. It is using Anonymous Delegates which we will
             //cover later on. 
             object nothing = null;
-<<<<<<< HEAD
-            Assert.Throws(typeof(FillMeIn), delegate () { nothing.ToString(); });
-=======
             Assert.Throws(typeof(NullReferenceException), delegate () { nothing.ToString(); });
             // alternative fancy sleek way
             Assert.Throws<NullReferenceException>(() => { nothing.ToString(); });
 
->>>>>>> 5827587 (aboutNull)
 
             //What's the message of the exception? What substring or pattern could you test
             //against in order to have a good idea of what the string is?
