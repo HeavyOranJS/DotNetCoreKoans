@@ -1,5 +1,6 @@
 using Xunit;
 using DotNetCoreKoans.Engine;
+using System.Globalization;
 
 namespace DotNetCoreKoans.Koans
 {
@@ -73,11 +74,53 @@ namespace DotNetCoreKoans.Koans
         public void ValueLargerThanTheMaximumFloatBecomesInfinity()
         {
             // If you try to store a number larger than the maximum number a float can store, it will become Infinity or -Infinity
-            var largerThanMaximumFloatValue = float.Parse("3.5E+38");
+
+            // Assert.True(float.IsPositiveInfinity(largerThanMaximumFloatValue));
+            // System.Console.WriteLine(float.MaxValue);
+            // var largerThanMaximumFloatValue = float.Parse("3,4028235E+38");
+            // float largerThanMaximumFloatValue = float.Parse("3,5E+38", );
+            // System.Console.WriteLine(largerThanMaximumFloatValue);
+
+            // Assert.True(FILL_ME_IN);
+
+            // InvariantCulture.NumberFormat
+            var largerThanMaximumFloatValue = float.Parse("3.5E+38", CultureInfo.InvariantCulture.NumberFormat);
             Assert.True(float.IsPositiveInfinity(largerThanMaximumFloatValue));
         }
 
         [Step(7)]
+        public void DifferentCulturesDifferentFloats()
+        {
+            // const string EnglishFloatString = "3.5E+37";
+            // const string RussianFloatString = "3,5E+37";
+
+            // const string EnglishFloatString = "3.4E+38";
+            // const string RussianFloatString = "3,4E+38";
+            const string EnglishFloatString = "42.001";
+            const string RussianFloatString = "42,001";
+
+            var EnglishCulture = new CultureInfo("zh-CN");
+            var RussianCulture = new CultureInfo("ru-RU");
+
+            float invariantNumber = float.Parse(EnglishFloatString, CultureInfo.InvariantCulture.NumberFormat);
+            float englishNumber = float.Parse(RussianFloatString, EnglishCulture.NumberFormat);
+            float russianNumber = float.Parse(RussianFloatString, RussianCulture.NumberFormat);
+
+            System.Console.WriteLine(float.MaxValue);
+            System.Console.WriteLine($"eu number is {englishNumber}");
+            System.Console.WriteLine($"ru number is {russianNumber}");
+            System.Console.WriteLine($"ru is infinity {(russianNumber)}");
+            System.Console.WriteLine("CurrentCulture is {0}.", CultureInfo.CurrentCulture.NumberFormat);
+
+            Assert.Equal(englishNumber, russianNumber);
+            Assert.Equal(invariantNumber, russianNumber);
+            Assert.Throws(typeof(FillMeIn), () =>
+            {
+                var brokenNumber = float.Parse(EnglishFloatString, RussianCulture.NumberFormat);
+            });
+        }
+
+        [Step(8)]
         public void FloatsHaveLimitedPrecision()
         {
             var sevenDigits = 0.9999999f;
@@ -104,7 +147,7 @@ namespace DotNetCoreKoans.Koans
             //If greater precision is needed, consider `decimal`
         }
 
-        [Step(8)]
+        [Step(9)]
         public void FloatingPointMathIsWeird()
         {
             var f = 0.3f + 0.6f;
