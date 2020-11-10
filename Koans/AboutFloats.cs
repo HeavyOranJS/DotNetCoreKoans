@@ -91,32 +91,28 @@ namespace DotNetCoreKoans.Koans
         [Step(7)]
         public void DifferentCulturesDifferentFloats()
         {
-            // const string EnglishFloatString = "3.5E+37";
-            // const string RussianFloatString = "3,5E+37";
-
-            // const string EnglishFloatString = "3.4E+38";
-            // const string RussianFloatString = "3,4E+38";
-            const string EnglishFloatString = "42.001";
+            const string CanadianFloatString = "42.001";
             const string RussianFloatString = "42,001";
 
-            var EnglishCulture = new CultureInfo("zh-CN");
+            var CanadianCulture = new CultureInfo("en-CA");
             var RussianCulture = new CultureInfo("ru-RU");
 
-            float invariantNumber = float.Parse(EnglishFloatString, CultureInfo.InvariantCulture.NumberFormat);
-            float englishNumber = float.Parse(RussianFloatString, EnglishCulture.NumberFormat);
+            float canadianNumber = float.Parse(CanadianFloatString, CanadianCulture.NumberFormat);
             float russianNumber = float.Parse(RussianFloatString, RussianCulture.NumberFormat);
+            float iDontCareAboutCulturesNumber = float.Parse(CanadianFloatString, CultureInfo.InvariantCulture.NumberFormat);
 
-            System.Console.WriteLine(float.MaxValue);
-            System.Console.WriteLine($"eu number is {englishNumber}");
-            System.Console.WriteLine($"ru number is {russianNumber}");
-            System.Console.WriteLine($"ru is infinity {(russianNumber)}");
-            System.Console.WriteLine("CurrentCulture is {0}.", CultureInfo.CurrentCulture.NumberFormat);
+            Assert.Equal(canadianNumber, FILL_ME_IN);
+            Assert.Equal(canadianNumber, russianNumber);
+            Assert.Equal(iDontCareAboutCulturesNumber, FILL_ME_IN);
 
-            Assert.Equal(englishNumber, russianNumber);
-            Assert.Equal(invariantNumber, russianNumber);
             Assert.Throws(typeof(FillMeIn), () =>
             {
-                var brokenNumber = float.Parse(EnglishFloatString, RussianCulture.NumberFormat);
+                var brokenNumber = float.Parse(CanadianFloatString, RussianCulture.NumberFormat);
+            });
+
+            Assert.Throws(typeof(FillMeIn), () =>
+            {
+                var anotherBrokenNumber = float.Parse(RussianFloatString, CultureInfo.InvariantCulture.NumberFormat);
             });
         }
 
