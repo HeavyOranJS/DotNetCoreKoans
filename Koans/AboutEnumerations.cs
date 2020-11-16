@@ -16,14 +16,15 @@ namespace DotNetCoreKoans.Koans
         structure and syntax looks like, how they are cased, how they are assigned
         values and then move on to the first step.
         */
-        enum MeditationForms
+        public enum MeditationForms
         {
             Mindfulness,
             SilentIllumination,
-            Contemplation
+            Contemplation,
+            Observation,
         }
 
-        enum LogLevel
+        public enum LogLevel
         {
             Debug = 100,
             Warning = 200,
@@ -31,7 +32,7 @@ namespace DotNetCoreKoans.Koans
         }
 
         [Flags]
-        enum DayOfTheWeek
+        public enum DayOfTheWeek
         {
             Monday,
             Tuesday,
@@ -49,19 +50,29 @@ namespace DotNetCoreKoans.Koans
             Creating an instance of an enum is as easy as assigning a member
             of the enum to a new variable. For instance:
             */
-            var mindfulness = MeditationForms.Mindfulness;
+            const MeditationForms mindfulness = MeditationForms.Mindfulness;
 
             /*
             While the underlying type of the instance above will be an integer,
             enums are first class types in the C# language. The type of the
             variable 'mindfulness' will be the enum itself.
             */
-            Assert.Equal(typeof(FillMeIn), mindfulness.GetType());
+            Assert.Equal(typeof(MeditationForms), mindfulness.GetType());
 
             /*
             Adding new members to an enum is straight-forward and as you'd expect.
             Try adding a new member to the 'MeditationForms' enum.
             */
+            // achived by adding "Observation" into enum initialization,
+            // but it's kinda boring.
+
+            // attempt 1
+            // var Observation = (Observation)3;
+            // attempt 2
+            // MeditationForms Observation = (MeditationForms)MeditationForms.ToObject(typeof(MeditationForms), 3);
+
+            //Okay, i give up. Seems like it's impossible.
+
             Assert.True(Enum.IsDefined(typeof(MeditationForms), "Observation"));
         }
 
@@ -77,7 +88,7 @@ namespace DotNetCoreKoans.Koans
             and increase by one.
             */
             var quietForm = (MeditationForms)1;
-            Assert.Equal(FILL_ME_IN, quietForm);
+            Assert.Equal(MeditationForms.SilentIllumination, quietForm);
 
             /*
             Why would casting integers to enums be valuable? You may want to
@@ -98,8 +109,7 @@ namespace DotNetCoreKoans.Koans
             There may be cases where you don't want enum members to start at zero
             and incrementing by one. Perhaps you want them incrementing by 100.
             */
-            var logLevel = LogLevel.Verbose;
-            Assert.Equal(FILL_ME_IN, (int)logLevel);
+            Assert.Equal(300, (int)LogLevel.Verbose);
         }
 
         [Step(4)]
@@ -116,7 +126,7 @@ namespace DotNetCoreKoans.Koans
             We're missing Friday!
             */
 
-            var workWeek = DayOfTheWeek.Monday | DayOfTheWeek.Tuesday | DayOfTheWeek.Wednesday | DayOfTheWeek.Thursday | FILL_ME_IN;
+            var workWeek = DayOfTheWeek.Monday | DayOfTheWeek.Tuesday | DayOfTheWeek.Wednesday | DayOfTheWeek.Thursday | DayOfTheWeek.Friday;
             Assert.True(workWeek.HasFlag(DayOfTheWeek.Friday)); // Assuming you work Fridays :)
         }
 
