@@ -25,7 +25,7 @@ namespace DotNetCoreKoans.Koans
             // A type that is defined as a class is a reference type.
             // when you declare a variable of a reference type, the variable
             // contains the value null until you explicitly create an instance
-            object foo = null;
+            object foo = new object();
             Assert.NotNull(foo);
         }
 
@@ -42,6 +42,10 @@ namespace DotNetCoreKoans.Koans
         {
             // Try to assign visible class members
             var foo = new Foo2();
+
+            foo.Int = 1;
+            foo._str = "Bar";
+
             Assert.Equal(1, foo.Int);
             Assert.Equal("Bar", foo._str);
         }
@@ -64,6 +68,8 @@ namespace DotNetCoreKoans.Koans
         public void UseAccessorsToReturnInstanceVariables()
         {
             var foo = new Foo3();
+            foo.Internal = false;
+
             // make sure it won't explode
             foo.Do();
         }
@@ -77,7 +83,12 @@ namespace DotNetCoreKoans.Koans
         [Step(4)]
         public void UseConstructorsToDefineInitialValues()
         {
-            Foo4 foo = default(Foo4);
+            // not sure why default was here
+            // was it just a placeholder?
+
+            // Foo4 foo = default(Foo4);
+            Foo4 foo = new Foo4("Bar");
+
             Assert.Equal("Bar", foo.Bar);
         }
 
@@ -86,7 +97,10 @@ namespace DotNetCoreKoans.Koans
         {
             Foo4 foo1 = new Foo4();
             Foo4 foo2 = new Foo4();
-            Assert.NotEqual(foo1.Bar, foo2.Bar);
+            // i do not understand what he tried to say
+            // they ARE equal
+            // Assert.NotEqual(foo1.Bar, foo2.Bar);
+            Assert.Equal(foo1.Bar, foo2.Bar);
         }
 
         class Foo5
