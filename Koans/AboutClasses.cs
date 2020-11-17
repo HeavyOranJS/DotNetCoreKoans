@@ -107,17 +107,20 @@ namespace DotNetCoreKoans.Koans
         {
             public int Val { get; }
             public Foo5(int val = 0) => Val = val;
-            public Foo5 Self() =>
-                throw new InvalidOperationException(nameof(Self));
+
+            public Foo5 Self() => this;
 
             public override string ToString()
             {
-                return base.ToString();
+                return "Foo5";
             }
 
             public override bool Equals(object obj)
             {
-                return base.Equals(obj);
+                var objFoo5 = obj as Foo5;
+                bool IS_VAL_EQUAL = this.Val == objFoo5.Val;
+                bool IS_STRING_REPR_EQUAL = this.ToString() == obj.ToString();
+                return IS_STRING_REPR_EQUAL && IS_VAL_EQUAL;
             }
 
             public override int GetHashCode()
@@ -129,6 +132,7 @@ namespace DotNetCoreKoans.Koans
         [Step(6)]
         public void MemberMethodSelfRefersToContainingObject()
         {
+            // this is a wierd one, was i really supposed to change method?
             Foo5 foo = new Foo5();
             Assert.Equal(foo, foo.Self());
         }
@@ -136,6 +140,7 @@ namespace DotNetCoreKoans.Koans
         [Step(7)]
         public void ToStringProvidesStringRepresentationOfAnObject()
         {
+            // i guess i really should just change class
             Foo5 foo = new Foo5();
             Assert.Equal("Foo5", foo.ToString());
         }
