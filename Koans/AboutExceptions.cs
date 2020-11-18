@@ -21,18 +21,18 @@ namespace DotNetCoreKoans.Koans
             // much nicer information to fellow developers (Who will be super grateful!)
 
             var awareness = 0;
-
             try
             {
                 throw new Exception("We tried something, but it did not work out");
             }
-            // FYI: This will catch all exceptions but we can be more specific as you will see when you continue your journey
+            // FYI: This will catch all exceptions but we can be
+            // more specific as you will see when you continue your journey
             catch (Exception)
             {
                 awareness += 1;
             }
 
-            Assert.Equal(FILL_ME_IN, awareness);
+            Assert.Equal(1, awareness);
         }
 
         [Step(3)]
@@ -53,7 +53,7 @@ namespace DotNetCoreKoans.Koans
                 status = exceptionObject.Message;
             }
 
-            Assert.Equal(FILL_ME_IN, status);
+            Assert.Equal("Ohm", status);
 
         }
 
@@ -77,16 +77,16 @@ namespace DotNetCoreKoans.Koans
                 Console.WriteLine("Our program had an error, your karma was not saved. Sorry man");
             }
 
-            Assert.Equal(FILL_ME_IN, KarmaIsSaved);
+            Assert.Equal(false, KarmaIsSaved);
         }
 
         [Step(5)]
         public void IndexOutOfBoundsException()
         {
-            // An Index out of bounds exception will be thrown if the application tries to access an index that is simply not there
+            // An Index out of bounds exception will be thrown 
+            // if the application tries to access an index that is simply not there
 
             string[] states = { "Enlightened", "Distracted", "Gaining Awareness" };
-
             string myCurrentState;
 
             try
@@ -98,7 +98,7 @@ namespace DotNetCoreKoans.Koans
                 myCurrentState = states[2];
             }
 
-            Assert.Equal(FILL_ME_IN, myCurrentState);
+            Assert.Equal("Gaining Awareness", myCurrentState);
         }
 
         [Step(6)]
@@ -122,14 +122,13 @@ namespace DotNetCoreKoans.Koans
                 IKnowNothingAboutExceptions = false;
             }
 
-            Assert.Equal(FILL_ME_IN, IKnowNothingAboutExceptions);
+            Assert.Equal(false, IKnowNothingAboutExceptions);
         }
 
         // This is how we defined our own custom exception. 
         // It is just a class that inherits from the System.Exception class. 
         public class ConfidenceException : Exception
         {
-
             public ConfidenceException() { }
 
             public ConfidenceException(string message) : base(message) { }
